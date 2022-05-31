@@ -102,6 +102,7 @@ public class UploadManager : MonoBehaviour
         yield return FileBrowser.WaitForLoadDialog(FileBrowser.PickMode.FilesAndFolders, true, null, null, "Carregar Arquivos e Pastas", "Carregar");
         if (preview)
             Destroy(preview);
+        _modelPath = FileBrowser.Result[0];
         SetModel(ObjReader.use.ConvertFile(_modelPath, false)[0], FileBrowser.Result[0]);
     }
 

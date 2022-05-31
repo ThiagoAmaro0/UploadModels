@@ -1,10 +1,40 @@
 {
   "project_info": {
     "project_number": "386409991063",
+    "firebase_url": "https://meta4chain-ar-default-rtdb.firebaseio.com/",
     "project_id": "meta4chain-ar",
     "storage_bucket": "meta4chain-ar.appspot.com"
   },
   "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386409991063:android:1b8e40d9b0823f6ce192d2",
+        "android_client_info": {
+          "package_name": "com.Brains.ARModelos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386409991063-nfrg2nv0l2c7co3c6uav3m5sd2tqt8l9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1GShGzqq2A-VW1iyhCTWpj9ld-fvqK0A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386409991063-nfrg2nv0l2c7co3c6uav3m5sd2tqt8l9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:386409991063:android:a05f5ad55a6f48f8e192d2",

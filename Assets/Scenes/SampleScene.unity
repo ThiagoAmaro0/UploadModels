@@ -622,7 +622,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 140574070}
-  m_LocalRotation: {x: -0.018189492, y: -0.000000001075221, z: -1.9560957e-11, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189492, y: 0.000000001075221, z: 1.9560957e-11, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1315,7 +1315,7 @@ MonoBehaviour:
   m_Script: {fileID: -1366542118, guid: b5f05ebfb3cbe4f9cb0ce5d8fcb92058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  use32BitIndices: 0
+  use32BitIndices: 1
   combineMultipleGroups: 1
   useSubmeshesWhenCombining: 1
   useFileNameAsObjectName: 0
@@ -3675,7 +3675,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.018189494, y: -0.0000000020944186, z: -1.0182808e-12, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189494, y: 0.0000000020944186, z: 1.0182808e-12, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4702,11 +4702,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressBar: {fileID: 2133447907}
   loadingPanel: {fileID: 30982710}
-  buttons:
-  - {fileID: 573205729}
-  - {fileID: 1065376639}
-  - {fileID: 2117359113}
-  - {fileID: 1031972080}
 --- !u!4 &1074347610
 Transform:
   m_ObjectHideFlags: 0
