@@ -38,8 +38,8 @@ public class UploadManager : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
-        string[] filePaths = Directory.GetFiles(Application.persistentDataPath); 
-        foreach (string filePath in filePaths) 
+        string[] filePaths = Directory.GetFiles(Application.persistentDataPath);
+        foreach (string filePath in filePaths)
             File.Delete(filePath);
 
     }
@@ -75,10 +75,10 @@ public class UploadManager : MonoBehaviour
                 break;
             }
         }
-
+        print(_currentModel);
         if (_currentModel == null)
             return;
-
+        loadingAction.Invoke();
         firebaseManager.LoadModel(_currentModel);
         firebaseManager.LoadTexture(_currentModel);
         firebaseManager.LoadIcon(_currentModel);
@@ -94,7 +94,7 @@ public class UploadManager : MonoBehaviour
         _descInput.text = "";
         _iconImage.sprite = defaultSpriteIcon;
         FirebaseManager.instance.DeleteModel(_currentModel);
-        
+
     }
 
     private IEnumerator LoadModel()
@@ -137,9 +137,20 @@ public class UploadManager : MonoBehaviour
             foreach (Material material in renderer.materials)
             {
                 material.mainTexture = texture;
+                UploadManager.instance.uploadDoneAction.Invoke();
             }
         }
-            
+
+    }
+
+    public bool CanSubmit()
+    {
+        return
+        !string.IsNullOrEmpty(_nameInput.text) &&
+        !string.IsNullOrEmpty(_descInput.text) &&
+        !string.IsNullOrEmpty(_iconPath) &&
+        !string.IsNullOrEmpty(_modelPath) &&
+        !string.IsNullOrEmpty(_texturePath);
     }
 
     public void Submit()
@@ -149,7 +160,19 @@ public class UploadManager : MonoBehaviour
         //StartCoroutine(PlayfabManager.instance.SetTitleData(currentModel));
         if (modelAssets == null)
             modelAssets = new List<ModelAsset>();
-        modelAssets.Add(new ModelAsset(_currentModel.name, _currentModel.description));
+
+        bool isNew = true;
+        foreach (ModelAsset model in modelAssets)
+        {
+            if (model.name == _currentModel.name)
+            {
+                isNew = false;
+                model.description = _currentModel.description;
+                break;
+            }
+        }
+        if (isNew)
+            modelAssets.Add(new ModelAsset(_currentModel.name, _currentModel.description));
         StartCoroutine(FirebaseManager.instance.UploadData(_currentModel));
     }
 

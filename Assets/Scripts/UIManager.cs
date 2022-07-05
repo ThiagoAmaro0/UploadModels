@@ -6,12 +6,13 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private ProgressBar progressBar;
     [SerializeField] private GameObject loadingPanel;
     private Button[] buttons;
 
+    [SerializeField] private Button submitBtn;
 
-    private void Start()
+
+    private void Awake()
     {
         buttons = FindObjectsOfType<Button>();
     }
@@ -29,7 +30,6 @@ public class UIManager : MonoBehaviour
 
     private void Loading()
     {
-        progressBar.ChangeValue(0);
         loadingPanel.SetActive(true);
 
         foreach (Button btn in buttons)
@@ -46,5 +46,10 @@ public class UIManager : MonoBehaviour
         {
             btn.interactable = true;
         }
+    }
+
+    private void Update()
+    {
+        submitBtn.interactable = UploadManager.instance.CanSubmit();
     }
 }

@@ -29,17 +29,20 @@ public class FirebaseManager : MonoBehaviour
 
     private void GetData()
     {
+        UploadManager.instance.loadingAction.Invoke();
         _dbReference.GetReference("ModelAssets").GetValueAsync().ContinueWithOnMainThread(task =>
         {
             if (task.IsFaulted)
             {
                 // Handle the error...
                 Debug.LogError(task.Exception.Message);
+                UploadManager.instance.uploadDoneAction.Invoke();
             }
             else if (task.IsCompleted)
             {
                 DataSnapshot snapshot = task.Result;
                 UploadManager.instance.modelAssets = JsonUtility.FromJson<ModelData>(snapshot.GetRawJsonValue()).modelAssets;
+                UploadManager.instance.uploadDoneAction.Invoke();
 
             }
         });
@@ -174,11 +177,11 @@ public class FirebaseManager : MonoBehaviour
         string path = Path.Combine(Application.persistentDataPath, model.name + ".obj");
         if (!File.Exists(path))
         {
-                DownloadModel(model);
+            DownloadModel(model);
         }
         else
         {
-                UploadManager.instance.SetModel(ObjReader.use.ConvertFile(path, false)[0], path);
+            UploadManager.instance.SetModel(ObjReader.use.ConvertFile(path, false)[0], path);
 
         }
     }
@@ -332,8 +335,8 @@ public class FirebaseManager : MonoBehaviour
 
     public void DeleteModel(ModelAsset model)
     {
-        DeleteFromDatabase("/Models/" + model.name + "/" + model.name +"_Model.obj");
-        DeleteFromDatabase("/Models/" + model.name + "/" + model.name +"_Texture.jpeg");
+        DeleteFromDatabase("/Models/" + model.name + "/" + model.name + "_Model.obj");
+        DeleteFromDatabase("/Models/" + model.name + "/" + model.name + "_Texture.jpeg");
         DeleteFromDatabase("/Models/" + model.name + "/" + model.name + "_Icon.jpeg");
     }
     private void DeleteFromDatabase(string path)
@@ -341,7 +344,8 @@ public class FirebaseManager : MonoBehaviour
         StorageReference desertRef = storageReference.Child(path);
 
         // Delete the file
-        desertRef.DeleteAsync().ContinueWithOnMainThread(task => {
+        desertRef.DeleteAsync().ContinueWithOnMainThread(task =>
+        {
             if (task.IsCompleted)
             {
                 Debug.Log("File deleted successfully.");
